@@ -31,6 +31,13 @@ public class BookStoreBuyTests {
                 store.buy(new BookID("2"), 1));
     }
 
+    @Test
+    public void throwsExceptionIfBookIsOutOfStock() {
+        givenInventoryContains(new BookID("1"), 2);
+        expectThrows(NotInStockException.class, () ->
+                store.buy(new BookID("1"), 4));
+    }
+
     private void thenTheStoreReportsQuantity(int expected, BookID bookID) {
         assertEquals(expected, store.getStockQuantity(bookID));
     }

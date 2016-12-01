@@ -14,6 +14,7 @@ public class BookStore {
 
     void buy(BookID bookID, int quantity) {
         int stockQuantity = getStockQuantity(bookID);
+        if (stockQuantity < quantity) throw new NotInStockException();
         stockQuantity -= quantity;
         inventory.setStockQuantity(bookID, stockQuantity);
     }
