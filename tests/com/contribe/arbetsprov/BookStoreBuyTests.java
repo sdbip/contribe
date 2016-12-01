@@ -28,7 +28,7 @@ public class BookStoreBuyTests {
     public void throwsExceptionIfBookIsUnknown() {
         givenInventoryContains(new BookID("1"), 4);
         expectThrows(NoSuchBookException.class, () ->
-                store.getStockQuantity(new BookID("2")));
+                store.buy(new BookID("2"), 1));
     }
 
     private void thenTheStoreReportsQuantity(int expected, BookID bookID) {

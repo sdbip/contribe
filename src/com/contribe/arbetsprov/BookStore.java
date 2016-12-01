@@ -13,7 +13,7 @@ public class BookStore {
     }
 
     void buy(BookID bookID, int quantity) {
-        int stockQuantity = inventory.getStockQuantity(bookID);
+        int stockQuantity = getStockQuantity(bookID);
         stockQuantity -= quantity;
         inventory.setStockQuantity(bookID, stockQuantity);
     }
