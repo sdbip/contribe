@@ -3,7 +3,6 @@ package com.contribe.arbetsprov;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -17,14 +16,5 @@ public class BookStoreTests {
         }};
 
         assertEquals(4, store.getStockQuantity(new BookID("1")));
-    }
-
-    private class TestInventory implements Inventory {
-        Map<BookID, Integer> stock;
-
-        @Override
-        public int getStockQuantity(BookID bookID) {
-            return stock.get(bookID);
-        }
     }
 }
