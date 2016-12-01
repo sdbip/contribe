@@ -39,18 +39,17 @@ public final class Book {
 Det står inget i beskrivningen om hur varukorgen ska sparas. Låt oss tills
 vidare anta att den inte behöver sparas och att man helt enkelt skapar den
 i frontend. En representation ska dock skickas till "backend." Förmodligen
-räcker det med en `java.util.Collection<LineItem>`:
+räcker det med en `java.util.Collection<OrderLineItem>`:
 
 ```java
-public interface LineItem {
-    BookID getBookID();
-    int getQuantity();
+public final class OrderLineItem {
+    public final BookID bookID;
+    public final int quantity;
 }
 
-public interface BookStore {
+public class BookStore {
     void buy(java.util.Collection<LineItem> books)
             throws NoSuchBookException, NotInStockException;
-    // ...
     // ...
 }
 ```
@@ -62,7 +61,7 @@ att använda för att rapportera fel. För att ta reda på status för en specif
 kan vi lägga till ett API specifikt för det:
 
 ```java
-public interface BookStore {
+public class BookStore {
     int getStockQuantity(BookID bookID)
             throws NoSuchBookException;
     // ...
@@ -73,7 +72,7 @@ Man ska också kunna söka efter böcker. Min erfarenhet är att Java-arrayer te
 att skapa komplex kod. Därför ändrar jag retur-värdet för `list()`-metoden:
 
 ```java
-public interface BookStore {
+public class BookStore {
     java.util.Set<Book> list(String searchString);
     // ...
 }
@@ -82,7 +81,7 @@ public interface BookStore {
 Hela `BookStore`-gränssnittet blir som följer:
 
 ```java
-public interface BookStore {
+public class BookStore {
     void buy(java.util.Collection<LineItem> books)
             throws NoSuchBookException, NotInStockException;
     int getStockQuantity(BookID bookID)
@@ -91,7 +90,13 @@ public interface BookStore {
 }
 ```
 
-För att köpa, måste man veta totalpris inklusive frakt mm. och göra en betalning.
+För att köpa, måste man veta totalpris inklusive frakt mm. och göra enbetalning.
 Hur detta gör till beskrivs inte i uppgiften, så jag antar att det ska läggas till
 senare. Eftersom jag inte har de detaljerna väljer jag i sann "agile"-anda att
 ignorera dem.
+
+Notera att om det inte beskrevs ett separat frontend-team hade jag undvikit en
+så här noggrann upfront-design. Enligt TDD ska designen göras inkrementellt och
+förändras med tiden allteftersom man lär sig av att utföra implementationen. Har
+man ett separat team antar jag att det tar tid att kommunicera med dem och att
+man därför behöver bestämma en ganska detaljerad design innan arbetet påbörjas.
