@@ -11,4 +11,10 @@ public class BookStore {
         if (!inventory.contains(bookID)) throw new NoSuchBookException();
         return inventory.getStockQuantity(bookID);
     }
+
+    void buy(BookID bookID, int quantity) {
+        int stockQuantity = inventory.getStockQuantity(bookID);
+        stockQuantity -= quantity;
+        inventory.setStockQuantity(bookID, stockQuantity);
+    }
 }

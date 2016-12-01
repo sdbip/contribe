@@ -12,6 +12,11 @@ class TestInventory implements Inventory {
     }
 
     @Override
+    public void setStockQuantity(BookID bookID, int quantity) {
+        stock.put(bookID, quantity);
+    }
+
+    @Override
     public boolean contains(BookID bookID) {
         return stock.containsKey(bookID);
     }
