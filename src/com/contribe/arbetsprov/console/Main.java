@@ -1,5 +1,7 @@
 package com.contribe.arbetsprov.console;
 
+import com.contribe.arbetsprov.Inventory;
+
 import java.text.ParseException;
 
 import static java.lang.System.exit;
@@ -9,7 +11,8 @@ public class Main {
     public static void main(String[] args) {
         try {
             Command command = parseArgs(args);
-            command.execute();
+            Inventory inventory = new InMemoryInventory();
+            command.execute(inventory);
         } catch (ParseException e) {
             printUsage();
             exit(1);

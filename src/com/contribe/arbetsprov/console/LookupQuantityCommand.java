@@ -2,6 +2,7 @@ package com.contribe.arbetsprov.console;
 
 import com.contribe.arbetsprov.BookID;
 import com.contribe.arbetsprov.BookStore;
+import com.contribe.arbetsprov.Inventory;
 
 import java.text.ParseException;
 
@@ -17,8 +18,8 @@ class LookupQuantityCommand implements Command {
     }
 
     @Override
-    public void execute() {
-        int stockQuantity = new BookStore(null).getStockQuantity(bookID);
+    public void execute(Inventory inventory) {
+        int stockQuantity = new BookStore(inventory).getStockQuantity(bookID);
         System.out.println(stockQuantity);
     }
 }

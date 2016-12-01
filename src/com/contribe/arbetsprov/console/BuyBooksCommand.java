@@ -1,9 +1,6 @@
 package com.contribe.arbetsprov.console;
 
-import com.contribe.arbetsprov.BookID;
-import com.contribe.arbetsprov.BookStore;
-import com.contribe.arbetsprov.NoSuchBookException;
-import com.contribe.arbetsprov.NotInStockException;
+import com.contribe.arbetsprov.*;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -27,9 +24,9 @@ class BuyBooksCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public void execute(Inventory inventory) {
         try {
-            new BookStore(null).buy(lineItems);
+            new BookStore(inventory).buy(lineItems);
         } catch (NoSuchBookException | NotInStockException e) {
             e.printStackTrace();
         }
