@@ -18,10 +18,21 @@ Därför är det rimligt att implementera `Book` som en enkel data-struktur
 (‘immutable’, med publika fält):
 
 ```java
+public final class BookID {
+    public final String isbn;
+    public BookID(String isbn) {
+        // ...
+    }
+}
+
 public final class Book {
+    public final BookID id;
     public final String title;
     public final String author;
     public final BigDecimal price;
+    public Book(BookID id, String title, String author, BigDecimal price) {
+        // ...
+    }
 }
 ```
 
@@ -32,13 +43,14 @@ räcker det med en `java.util.Collection<LineItem>`:
 
 ```java
 public interface LineItem {
-    Book getBook();
+    BookID getBookID();
     int getQuantity();
 }
 
 public interface BookStore {
     void buy(java.util.Collection<LineItem> books)
             throws NoSuchBookException, NotInStockException;
+    // ...
     // ...
 }
 ```
@@ -51,7 +63,7 @@ kan vi lägga till ett API specifikt för det:
 
 ```java
 public interface BookStore {
-    int getStockQuantity(Book book)
+    int getStockQuantity(BookID bookID)
             throws NoSuchBookException;
     // ...
 }
@@ -73,7 +85,7 @@ Hela `BookStore`-gränssnittet blir som följer:
 public interface BookStore {
     void buy(java.util.Collection<LineItem> books)
             throws NoSuchBookException, NotInStockException;
-    int getStockQuantity(Book book)
+    int getStockQuantity(BookID bookID)
             throws NoSuchBookException;
     java.util.Set<Book> list(String searchString);
 }
