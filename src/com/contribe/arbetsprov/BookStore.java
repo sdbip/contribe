@@ -8,6 +8,7 @@ public class BookStore {
     }
 
     int getStockQuantity(BookID bookID) {
+        if (!inventory.contains(bookID)) throw new NoSuchBookException();
         return inventory.getStockQuantity(bookID);
     }
 }

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.expectThrows;
 
 public class BookStoreTests {
 
@@ -20,6 +21,13 @@ public class BookStoreTests {
     public void returnsTheCorrectStockQuantity() {
         givenInventoryContains(new BookID("1"), 4);
         thenTheStoreReportsQuantity(4, new BookID("1"));
+    }
+
+    @Test
+    public void throwsExceptionIfBookIsUnknown() {
+        givenInventoryContains(new BookID("1"), 4);
+        expectThrows(NoSuchBookException.class, () ->
+                store.getStockQuantity(new BookID("2")));
     }
 
     private void thenTheStoreReportsQuantity(int expected, BookID bookID) {
