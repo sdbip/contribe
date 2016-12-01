@@ -3,6 +3,8 @@ package com.contribe.arbetsprov;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.expectThrows;
 
@@ -28,14 +30,14 @@ public class BookStoreBuyTests {
     public void throwsExceptionIfBookIsUnknown() {
         givenInventoryContains(new BookID("1"), 4);
         expectThrows(NoSuchBookException.class, () ->
-                store.buy(new BookID("2"), 1));
+                buy(new BookID("2"), 1));
     }
 
     @Test
     public void throwsExceptionIfBookIsOutOfStock() {
         givenInventoryContains(new BookID("1"), 2);
         expectThrows(NotInStockException.class, () ->
-                store.buy(new BookID("1"), 4));
+                buy(new BookID("1"), 4));
     }
 
     private void thenTheStoreReportsQuantity(int expected, BookID bookID) {
@@ -47,6 +49,10 @@ public class BookStoreBuyTests {
     }
 
     private void whenBuyingBook(BookID bookID, int quantity) {
-        store.buy(bookID, quantity);
+        buy(bookID, quantity);
+    }
+
+    private void buy(BookID bookID, int quantity) {
+        store.buy(Collections.singleton(new BookStore.LineItem(bookID, quantity)));
     }
 }

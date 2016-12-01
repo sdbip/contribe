@@ -1,5 +1,7 @@
 package com.contribe.arbetsprov;
 
+import java.util.Collection;
+
 public class BookStore {
     private final Inventory inventory;
 
@@ -12,7 +14,14 @@ public class BookStore {
         return inventory.getStockQuantity(bookID);
     }
 
-    void buy(BookID bookID, int quantity) {
+    void buy(Collection<LineItem> books)
+            throws NoSuchBookException, NotInStockException {
+        for (LineItem lineItem : books) {
+            buy(lineItem.bookID, lineItem.quantity);
+        }
+    }
+
+    private void buy(BookID bookID, int quantity) {
         int stockQuantity = getStockQuantity(bookID);
         if (stockQuantity < quantity) throw new NotInStockException();
         stockQuantity -= quantity;
