@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.expectThrows;
 
-public class BookStoreTests {
+public class BookStoreQuantityTests {
 
     private BookStore store;
     private TestInventory inventory;
