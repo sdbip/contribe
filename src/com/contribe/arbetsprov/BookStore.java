@@ -17,8 +17,7 @@ public class BookStore {
     void buy(Collection<LineItem> books)
             throws NoSuchBookException, NotInStockException {
         for (LineItem lineItem : books) {
-            int stockQuantity = getStockQuantity(lineItem.bookID);
-            if (stockQuantity < lineItem.quantity) throw new NotInStockException();
+            requireStockQuantity(lineItem.bookID, lineItem.quantity);
         }
         for (LineItem lineItem : books) {
             buy(lineItem.bookID, lineItem.quantity);
@@ -26,10 +25,15 @@ public class BookStore {
     }
 
     private void buy(BookID bookID, int quantity) {
+        requireStockQuantity(bookID, quantity);
         int stockQuantity = getStockQuantity(bookID);
-        if (stockQuantity < quantity) throw new NotInStockException();
         stockQuantity -= quantity;
         inventory.setStockQuantity(bookID, stockQuantity);
+    }
+
+    private void requireStockQuantity(BookID bookID, int quantity) {
+        int stockQuantity = getStockQuantity(bookID);
+        if (stockQuantity < quantity) throw new NotInStockException();
     }
 
     final static class LineItem {
