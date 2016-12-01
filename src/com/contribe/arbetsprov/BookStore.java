@@ -1,7 +1,13 @@
 package com.contribe.arbetsprov;
 
 public class BookStore {
-    public BookStore(Inventory inventory) {
+    private final Inventory inventory;
 
+    public BookStore(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    int getStockQuantity(BookID bookID) {
+        return inventory.getStockQuantity(bookID);
     }
 }
