@@ -1,9 +1,10 @@
 package com.contribe.arbetsprov;
 
+import java.util.HashMap;
 import java.util.Map;
 
 class TestInventory implements Inventory {
-    Map<BookID, Integer> stock;
+    Map<BookID, Integer> stock = new HashMap<>();
 
     @Override
     public int getStockQuantity(BookID bookID) {
