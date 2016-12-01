@@ -1,4 +1,4 @@
 package com.contribe.arbetsprov;
 
-class NoSuchBookException extends RuntimeException {
+public class NoSuchBookException extends RuntimeException {
 }

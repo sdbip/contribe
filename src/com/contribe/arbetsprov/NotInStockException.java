@@ -1,4 +1,4 @@
 package com.contribe.arbetsprov;
 
-class NotInStockException extends RuntimeException {
+public class NotInStockException extends RuntimeException {
 }
