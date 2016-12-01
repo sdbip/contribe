@@ -37,8 +37,8 @@ public class BookStore {
     }
 
     public final static class LineItem {
-        final BookID bookID;
-        final int quantity;
+        public final BookID bookID;
+        public final int quantity;
 
         public LineItem(BookID bookID, int quantity) {
             this.bookID = bookID;

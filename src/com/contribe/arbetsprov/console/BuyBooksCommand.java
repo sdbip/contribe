@@ -13,10 +13,10 @@ class BuyBooksCommand implements Command {
     public void parse(String[] args) throws ParseException {
         // Main buy-books {bookID quantity}*
 
-        if (args.length < 4) throw new ParseException("", 0);
-        if (args.length % 2 != 0) throw new ParseException("", 0);
+        if (args.length < 3) throw new ParseException("", 0);
+        if (args.length % 2 != 1) throw new ParseException("", 0);
 
-        for (int i = 2; i < args.length; i+=2) {
+        for (int i = 1; i < args.length; i+=2) {
             BookID bookID = new BookID(args[i]);
             int quantity = Integer.valueOf(args[i + 1]);
             lineItems.add(new BookStore.LineItem(bookID, quantity));
@@ -29,6 +29,11 @@ class BuyBooksCommand implements Command {
             new BookStore(inventory).buy(lineItems);
         } catch (NoSuchBookException | NotInStockException e) {
             e.printStackTrace();
+        }
+
+        for (BookStore.LineItem lineItem : lineItems) {
+            System.out.println("Bought " + lineItem.quantity + " of " + lineItem.bookID);
+            System.out.println("There are now " + inventory.getStockQuantity(lineItem.bookID) + " items left.");
         }
     }
 }

@@ -26,8 +26,8 @@ public class Main {
     }
 
     private static Command parseArgs(String[] args) throws ParseException {
-        if (args.length < 2) throw new ParseException("", 0);
-        String commandName = args[1];
+        if (args.length < 1) throw new ParseException("", 0);
+        String commandName = args[0];
         Command command = byName(commandName);
         command.parse(args);
         return command;

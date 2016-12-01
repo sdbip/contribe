@@ -13,8 +13,8 @@ class LookupQuantityCommand implements Command {
     public void parse(String[] args) throws ParseException {
         // Main lookup-quantity bookID
 
-        if (args.length != 3) throw new ParseException("", 0);
-        bookID = new BookID(args[2]);
+        if (args.length != 2) throw new ParseException("", 0);
+        bookID = new BookID(args[1]);
     }
 
     @Override
