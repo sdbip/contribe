@@ -9,9 +9,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 class FlatFileInventory implements Inventory {
     private final static File DATA_FILE = new File("bookstoredata.txt");
@@ -75,15 +73,6 @@ class FlatFileInventory implements Inventory {
             };
             String line = String.join(";", data);
             writer.write(line);
-//            writer.write(bookID.isbn);
-//            writer.write(";");
-//            writer.write(book.title);
-//            writer.write(";");
-//            writer.write(book.author);
-//            writer.write(";");
-//            writer.write(book.price.toPlainString());
-//            writer.write(";");
-//            writer.write(quantity);
             writer.write('\n');
         }
         writer.close();
