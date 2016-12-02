@@ -1,6 +1,8 @@
 package com.contribe.arbetsprov;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BookStore {
     private final Inventory inventory;
@@ -34,6 +36,10 @@ public class BookStore {
     private void requireStockQuantity(BookID bookID, int quantity) {
         int stockQuantity = getStockQuantity(bookID);
         if (stockQuantity < quantity) throw new NotInStockException();
+    }
+
+    public Set<Book> list(String searchString) {
+        return new HashSet<>(inventory.list(searchString));
     }
 
     public final static class LineItem {

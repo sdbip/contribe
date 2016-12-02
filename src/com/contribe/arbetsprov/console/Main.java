@@ -27,6 +27,7 @@ public class Main {
         System.out.println("\tMain add-book bookID title author price quantity");
         System.out.println("\tMain buy-books {bookID quantity}*");
         System.out.println("\tMain lookup-quantity bookID");
+        System.out.println("\tMain find-books \"searchString\"");
     }
 
     private static Command parseArgs(String[] args) throws ParseException {
@@ -42,6 +43,7 @@ public class Main {
             case "add-book": return new AddBookCommand();
             case "buy-books": return new BuyBooksCommand();
             case "lookup-quantity": return new LookupQuantityCommand();
+            case "find-books": return new FindBooksCommand();
             default: throw new ParseException("commandName", 0);
         }
     }

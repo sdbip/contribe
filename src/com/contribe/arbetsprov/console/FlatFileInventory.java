@@ -89,4 +89,15 @@ class FlatFileInventory implements Inventory {
         books.put(book.id, book);
         writeToFileIgnoringError();
     }
+
+    @Override
+    public Set<Book> list(String searchString) {
+        Set<Book> result = new HashSet<>();
+        for (Map.Entry<BookID, Book> entry : books.entrySet()) {
+            Book book = entry.getValue();
+            if (book.title.equals(searchString))
+                result.add(book);
+        }
+        return result;
+    }
 }
