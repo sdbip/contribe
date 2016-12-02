@@ -2,6 +2,7 @@ package com.contribe.arbetsprov.console;
 
 import com.contribe.arbetsprov.Inventory;
 
+import java.io.IOException;
 import java.text.ParseException;
 
 import static java.lang.System.exit;
@@ -11,16 +12,19 @@ public class Main {
     public static void main(String[] args) {
         try {
             Command command = parseArgs(args);
-            Inventory inventory = new InMemoryInventory();
+            Inventory inventory = new FlatFileInventory();
             command.execute(inventory);
         } catch (ParseException e) {
             printUsage();
             exit(1);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     private static void printUsage() {
         System.out.println("Usage: ");
+        System.out.println("\tMain add-book bookID title author price quantity");
         System.out.println("\tMain buy-books {bookID quantity}*");
         System.out.println("\tMain lookup-quantity bookID");
     }
@@ -35,6 +39,7 @@ public class Main {
 
     private static Command byName(String commandName) throws ParseException {
         switch (commandName) {
+            case "add-book": return new AddBookCommand();
             case "buy-books": return new BuyBooksCommand();
             case "lookup-quantity": return new LookupQuantityCommand();
             default: throw new ParseException("commandName", 0);

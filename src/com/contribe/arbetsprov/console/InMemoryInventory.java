@@ -1,5 +1,6 @@
 package com.contribe.arbetsprov.console;
 
+import com.contribe.arbetsprov.Book;
 import com.contribe.arbetsprov.BookID;
 import com.contribe.arbetsprov.Inventory;
 
@@ -30,5 +31,10 @@ class InMemoryInventory implements Inventory {
     @Override
     public boolean contains(BookID bookID) {
         return stock.containsKey(bookID);
+    }
+
+    @Override
+    public void addBook(Book book, int quantity) {
+        stock.put(book.id, quantity);
     }
 }

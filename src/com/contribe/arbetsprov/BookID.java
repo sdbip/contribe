@@ -1,7 +1,7 @@
 package com.contribe.arbetsprov;
 
 public final class BookID {
-    private final String isbn;
+    public final String isbn;
 
     public BookID(String isbn) {
         this.isbn = isbn;

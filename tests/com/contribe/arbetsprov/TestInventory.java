@@ -20,4 +20,9 @@ class TestInventory implements Inventory {
     public boolean contains(BookID bookID) {
         return stock.containsKey(bookID);
     }
+
+    @Override
+    public void addBook(Book book, int quantity) {
+
+    }
 }
