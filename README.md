@@ -100,3 +100,16 @@ så här noggrann upfront-design. Enligt TDD ska designen göras inkrementellt o
 förändras med tiden allteftersom man lär sig av att utföra implementationen. Har
 man ett separat team antar jag att det tar tid att kommunicera med dem och att
 man därför behöver bestämma en ganska detaljerad design innan arbetet påbörjas.
+
+----
+
+Sök-funktionen är inte väl testad. Algoritmen är implementerad i testet, inte i
+BookStore. Jag känner att det kan bli svårt att hitta en algoritm som
+implementeras av BookStore utan att generera SQL-frågor, och SQL-frågor kan
+inte testas utan en databas. Se det skulle inte längre vara enhetstest.
+
+----
+
+Konsoll-appen har inga enhetstest. Den kan bara köras manuellt. Så det är så
+jag har testat den. Anledningen är att den bara skulle vara en stand-in för
+frontend-teamets arbete.
